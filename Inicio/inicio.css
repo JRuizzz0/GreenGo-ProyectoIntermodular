@@ -1,206 +1,272 @@
+/* Reset y Base */
 * {
     margin: 0;
     padding: 0;
-    
+    box-sizing: border-box; /* Evita problemas con el padding */
 }
- 
+
 body {
-    background-color: beige;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    /* Fondo verde muy, muy pálido, casi blanco, para dar frescura */
+    background-color: #f1f8e9; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Texto principal en gris muy oscuro, mejor que negro puro */
+    color: #333; 
 }
 
-
-/*Estilos para el div que contiene el header, el main y el footer */
+/* Contenedor Principal */
 .directorio-container {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  grid-template-areas:
-    "header"
-    "main"
-    "footer";
-}
-/*Estilos para el header*/
-.header {
-  grid-area: header;
-  background-color: rgb(242, 180, 180);
-  color: rgb(112, 65, 65);
-  padding: 30px;
-  display: grid;
-  gap: 20px;
-  
-}
-
-.header h1 {
-  text-align: center;
-  font-family:Georgia, 'Times New Roman', Times, serif;
-}
-.header h3 {
-  text-align: center;
-  font-family:Georgia, 'Times New Roman', Times, serif;
-}
-
-/*Estilos para el navegador(header) */
-.filtrar {
-  display: grid;
-  grid-template-columns: repeat(4, auto);
-  gap: 15px;
-  justify-content: left;
-  align-items: center;
-  
-}
-/*Estilos para el main */
-main {
-  grid-area: main;
-  padding: 40px;
-}
-
-.carrito{
     display: grid;
-  grid-template-columns: repeat(4, auto);
-  gap: 15px;
-  justify-content: right;
-  align-items: center;
-}
-
-/*Estilos para el footer */
-.footer {
-  grid-area: footer;
-  background-color: rgb(242, 180, 180);
-  color: rgb(112, 65, 65);
-  text-align: center;
-  padding: 20px;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+    min-height: 100vh; /* Fuerza al footer a ir al fondo */
 }
 
 
-/*Estilosla disposicion de las tarjetas */
+.header {
+    grid-area: header;
+    /* Verde principal, vibrante y natural */
+    background-color: #4caf50; 
+    /* Texto en blanco puro para máximo contraste */
+    color: white; 
+    padding: 20px 50px;
+    display: flex; /* Flex es mejor para separar título de carrito */
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+#contHeader {
+    text-align: left;
+}
+
+#titulo {
+    font-family: 'Georgia', serif;
+    font-size: 2.8rem;
+    letter-spacing: 1px;
+}
+
+#slogan {
+    font-size: 1rem;
+    font-style: italic;
+    opacity: 0.9; /* Un poco transparente para no competir con el título */
+    margin-top: 5px;
+}
+
+/* Carrito (Icono arriba a la derecha) */
+.carrito #carro {
+    background: white;
+    /* Texto del carrito en verde oscuro */
+    color: #2e7d32; 
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.carrito #carro:hover {
+    /* Al pasar el ratón, invertimos colores */
+    background: #2e7d32;
+    color: white;
+    transform: scale(1.05);
+}
+
+
+main {
+    grid-area: main;
+    padding: 40px 5%;
+}
+
+/* Sección de Filtros */
+.filtrar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    /* Línea divisoria suave en tono tierra */
+    border-bottom: 2px solid #dcedc8; 
+}
+
+/* Inputs y Botones */
+#inpTexto, select {
+    padding: 12px;
+    border-radius: 8px;
+    /* Borde suave */
+    border: 2px solid #c5e1a5; 
+    outline: none;
+    background-color: white;
+    font-size: 1rem;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+#inpTexto:focus, select:focus {
+    /* Resaltado en verde principal al hacer foco */
+    border-color: #4caf50; 
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+/* Botón de Búsqueda Principal */
+button#btnBusqueda {
+    /* Verde oscuro para acciones principales */
+    background-color: #2e7d32; 
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+button#btnBusqueda:hover {
+    /* Un verde aún más oscuro al pasar el ratón */
+    background-color: #1b5e20; 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+
 #tarjetas {
-  display: grid;
-  grid-template-columns: repeat(3, auto);
-  gap: 30px;
-  max-width: 1200px;
-  margin: 0 auto;
+    display: grid;
+    /* Responsivo automático: columnas de mínimo 300px */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
 }
 
-/*Estilos para el contenido de las tarjetas */
+/* Estilo de cada Tarjeta individual */
 .tarjeta {
-  display: flex;
-  flex-direction: column; 
-  overflow: hidden; 
-  background-color: rgb(255, 255, 255);
-  border-radius: 20px;
-  box-shadow: 2px 4px 10px rgb(0, 0, 0);
-  transition: transform 0.3s, box-shadow 0.3s;
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    /* Sombra suave para dar profundidad */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    /* Borde sutil inferior en verde */
+    border-bottom: 4px solid transparent; 
 }
 
-
-/*Estilos para cuando se pasa el cursor por encima de las tarjetas*/
 .tarjeta:hover {
-  transform: scale(1.03);
-  box-shadow: 4px 8px 15px rgba(0, 0, 0, 0.2);
+    /* Efecto de "flotar" y sombra más pronunciada */
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    border-bottom-color: #81c784; /* Aparece borde verde suave */
 }
 
-/*Estilos para la imagen */
 .imagen-plato {
-  width: 100%;
-  height: 400px; 
-  border-bottom: 3px solid rgb(242, 180, 180);
-  
+    width: 100%;
+    height: 250px; /* Altura fija equilibrada */
+    object-fit: cover; /* Recorta la imagen sin deformarla */
+    /* Separador sutil bajo la imagen en verde pálido */
+    border-bottom: 2px solid #f1f8e9; 
 }
 
 .titulo {
-  padding: 15px 15px 5px 15px;
-  font-size: 25px;
-  color: rgb(112, 65, 65);
+    padding: 20px 20px 10px 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    /* Título del plato en verde oscuro */
+    color: #1b5e20; 
+    font-family: 'Georgia', serif;
 }
 
 .descripcion {
-  padding: 5px;
-  font-size: 17px;
-  color: rgb(144, 39, 39);
-  flex-grow: 1;
-}
-
- select {
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid rgb(204, 204, 204);
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 20px;
-}
-
-/*Estilos para el boton de busqueda */
-#inpTexto {
-padding: 10px;
-  border-radius: 6px;
-  border: 1px solid rgb(204, 204, 204);
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 20px;
-}
-
-button {
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 20px;
-  padding: 10px;
-  border-radius: 6px;
-  background-color: rgb(233, 69, 96);
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.2s;
-}
-/*Estilos para cuando se pasa el cursor por los botones */
-button:hover {
-  background-color: rgb(200, 50, 80);
+    padding: 0 20px 25px 20px;
+    font-size: 1rem;
+    /* Descripción en gris medio para lectura fácil */
+    color: #666; 
+    line-height: 1.5;
+    flex-grow: 1; /* Empuja el contenido hacia abajo uniformemente */
 }
 
 
 .modal {
-    display: none;
+    display: none; /* Oculto por defecto */
     position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.6);
+    z-index: 1000; /* Siempre encima */
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    /* Fondo oscuro semitransparente */
+    background-color: rgba(0,0,0,0.7); 
+    backdrop-filter: blur(5px); /* Efecto de cristal esmerilado */
     justify-content: center;
     align-items: center;
+    transition: all 0.3s ease;
 }
 
 .modal_content {
     background-color: white;
+    padding: 40px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+}
+
+/* Estilos para el contenido dentro del modal (detalles del plato) */
+#nombrePlato {
+    font-size: 2rem;
+    color: #1b5e20;
+    font-family: 'Georgia', serif;
+    margin-bottom: 15px;
+    border: none; /* Eliminamos el borde que tenías */
+}
+
+#descPlato {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+    border: none; /* Eliminamos el borde que tenías */
+}
+
+
+.footer {
+    grid-area: footer;
+    /* Mismo verde que el header para consistencia */
+    background-color: #4caf50; 
+    color: white;
+    text-align: center;
     padding: 30px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 300px;
+    font-size: 0.95rem;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+}
+
+.footer p {
+    opacity: 0.9;
+    line-height: 1.6;
 }
 
 
-
-
-/*Estilos para el contendio del modal de añadir tarjeta */
-#nombrePlato,
-#descPlato
-{
-  border-radius: 6px;
-  border: 1px solid rgb(204, 204, 204);
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 20px;
-
-  
-}
-
-
-/*Estilos pantalla */
-@media screen and (max-width: 1200px){
+@media screen and (max-width: 768px) {
     .header {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        gap: 15px;
         text-align: center;
+        padding: 20px;
     }
-    .header .nav {
-        justify-self: center;
-        grid-template-columns: repeat(2, auto);
+    
+    #titulo {
+        font-size: 2.2rem;
+    }
+
+    .filtrar {
+        justify-content: center;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    main {
+        padding: 20px 5%;
     }
 }

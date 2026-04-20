@@ -5,73 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="inicio.css">
     <script src="inicio.js" defer></script>
-    <title>Inicio</title>
+    <title>GreenGo - Inicio</title>
 </head>
 <body>
-     <div class="directorio-container">
+    <div class="directorio-container">
 
-     
-    <header class="header">
-        <div id="contHeader">
-            <h1 id="titulo">GreenGo</h1>
-            <h3 id="slogan">Una buena alimentacion es primordial para tu vida</h3>
+        <header class="header">
+            <div id="contHeader">
+                <h1 id="titulo">GreenGo</h1>
+                <h3 id="slogan">Una buena alimentación es primordial para tu vida</h3>
+            </div>
+
+            <section class="carrito">
+                <div id="carro">
+                    <p>🛒 Aquí irá el carro</p>
+                </div>
+            </section>
+        </header>
+
+        <main class="main">
+            <section class="filtrar">
+                <div id="contFiltros">
+                    <label for="inpTexto" style="display:none;">Buscar platos</label>
+                    <input type="text" id="inpTexto" placeholder="Buscar plato...">
+                    
+                    <button id="btnBusqueda">Buscar</button>
+
+                    <select name="platos" id="slcPlatos">
+                        <option value="" disabled selected>Filtrar por categoría</option>
+                        <option value="1Plato">Primeros platos</option>
+                        <option value="2Plato">Segundos platos</option>
+                        <option value="Postre">Postres</option>
+                        <option value="Bebida">Bebidas</option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="mainPlatos">
+                <div id="tarjetas">
+                    <p>Cargando platos...</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>© 2026 GreenGo. Todos los derechos reservados.<br>
+               Hecho por Jaime Ruiz, Marco Villamediana y Alejandro Verdugo.
+            </p>
+        </footer>
+
+    </div> <div id="modalTarjeta" class="modal">
+        <div class="modal_content">
+            <span class="close-modal">&times;</span> <h2>Detalle del plato</h2>
+            <div id="infoPlato">
+                <p id="nombrePlato"></p>
+                <div id="imgPlato"></div> <p id="descPlato"></p>
+            </div>
         </div>
-
-         <section class="carrito">
-
-            <div id="carro">
-                <p>Aqui ira el carro</p>
-            </div>
-
-        </section>
-        
-    </header>
-
-    <main class="main">
-
-        <section class="filtrar">
-
-            <div id="contFiltros">
-                <input type="text"  id="inpTexto" placeholder="Campo de busqueda">
-                <button id="btnBusqueda">Buscar</button>
-                <select name="platos" id="slcPlatos">
-                    <option value="1Plato" id="1plato">Primeros platos</option>
-                    <option value="2Plato" id="2plato">Segundos platos</option>
-                    <option value="Postre" id="postre">Postres</option>
-                    <option value="Bebida" id="bebida">Bebidas</option>
-                </select>
-            </div>
-
-        </section>
-
-    
-
-        <section class="mainPlatos">
-
-            <div id="tarjetas">
-                <p>Aqui iran todos los platos</p>
-            </div>
-
-        </section>
-
-    </main>
-
-    <footer class="footer">
-    
-        <p>© 2026 GreenGo. Todos los derechos reservados.<br>
-            Hecho por Jaime Ruiz, Marco Villamediana y Alejandro Verdugo.
-            
-        </p>
-
-    </footer>
-    <div id="modalTarjeta" class="modal">
-    <div class="modal_content">
-        <h2>Detalle del plato</h2>
-        
-       <p id="nombrePlato"></p>
-       <p id="imgPlato"></p>
-       <p id="descPlato"></p>
     </div>
-</div>
+
 </body>
 </html>
