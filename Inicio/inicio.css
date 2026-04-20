@@ -56,7 +56,7 @@ body {
 }
 
 /* Carrito (Icono arriba a la derecha) */
-.carrito #carro {
+.carrito #btnCarrito {
     background: white;
     /* Texto del carrito en verde oscuro */
     color: #2e7d32; 
@@ -69,7 +69,7 @@ body {
     border: 2px solid transparent;
 }
 
-.carrito #carro:hover {
+.carrito #btnCarrito:hover {
     /* Al pasar el ratón, invertimos colores */
     background: #2e7d32;
     color: white;
@@ -252,6 +252,72 @@ button#btnBusqueda:hover {
     line-height: 1.6;
 }
 
+#btnComprar{
+    background-color: #2e7d32; 
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.btn-pagar{
+     background-color: #2e7d32; 
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.btn-cerrar{
+     background-color: #c52727; 
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#iCarrito{
+    font-size: xx-large;
+}
+
+#notificacion {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #2e7d32; 
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transition: all 0.5s ease;
+    font-weight: bold;
+    pointer-events: none; 
+}
+
+.notificacion-oculta {
+    opacity: 0;
+    transform: translateY(100px);
+}
+
+.notificacion-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 
 @media screen and (max-width: 768px) {
     .header {

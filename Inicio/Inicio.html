@@ -17,8 +17,8 @@
             </div>
 
             <section class="carrito">
-                <div id="carro">
-                    <p>🛒 Aquí irá el carro</p>
+                <div id="btnCarrito">
+                    <p id="iCarrito">🛒 <span id="contador-carrito">0</span></p>
                 </div>
             </section>
         </header>
@@ -32,18 +32,18 @@
                     <button id="btnBusqueda">Buscar</button>
 
                     <select name="platos" id="slcPlatos">
-                        <option value="" disabled selected>Filtrar por categoría</option>
-                        <option value="1Plato">Primeros platos</option>
-                        <option value="2Plato">Segundos platos</option>
-                        <option value="Postre">Postres</option>
-                        <option value="Bebida">Bebidas</option>
+                        <option value="0">Ver todos los platos</option> 
+                        <option value="1">Primeros platos</option>
+                        <option value="2">Segundos platos</option>
+                        <option value="3">Postres</option>
+                        <option value="4">Bebidas</option>
                     </select>
                 </div>
             </section>
 
             <section class="mainPlatos">
                 <div id="tarjetas">
-                    <p>Cargando platos...</p>
+                    
                 </div>
             </section>
         </main>
@@ -54,7 +54,8 @@
             </p>
         </footer>
 
-    </div> <div id="modalTarjeta" class="modal">
+    </div> 
+    <div id="modalTarjeta" class="modal">
         <div class="modal_content">
             <span class="close-modal">&times;</span> <h2>Detalle del plato</h2>
             <div id="infoPlato">
@@ -63,6 +64,8 @@
             </div>
         </div>
     </div>
+
+    <div id="notificacion" class="notificacion-oculta"></div>
 
 </body>
 </html>
