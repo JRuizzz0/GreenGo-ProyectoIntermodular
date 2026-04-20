@@ -189,6 +189,11 @@ button#btnBusqueda:hover {
     flex-grow: 1; /* Empuja el contenido hacia abajo uniformemente */
 }
 
+.precio-seccion{
+    padding: 15px; 
+    font-weight: bold; 
+    color: #2e7d32
+}
 
 .modal {
     display: none; /* Oculto por defecto */
