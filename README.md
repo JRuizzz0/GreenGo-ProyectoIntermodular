@@ -52,3 +52,19 @@ INSERT INTO PRODUCTO (nombre, descripcion, precio_base, imagen_url, stock, id_ca
 ('Limonada Casera con Menta', 'Zumo de limón natural, menta fresca y un toque de estevia.', 2.90, 'https://images.unsplash.com/photo-1523472721958-978152f4d69b?q=80&w=500', 40, 4, 2),
 ('Té Frío de Hibisco', 'Infusión natural de hibisco con frutos rojos y mucho hielo.', 3.20, 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?q=80&w=500', 35, 4, 2),
 ('Cerveza Artesana Local (Bio)', 'Cerveza rubia de producción ecológica y proximidad.', 4.50, 'https://images.unsplash.com/photo-1535958636474-b021ee887b13?q=80&w=500', 50, 4, 2);
+
+
+CREATE TABLE Alergenos(
+id_alergeno serial PRIMARY KEY,
+nombre_alergeno Varchar(100) NOT NULL,
+desc_alergeno TEXT Not null
+);
+
+CREATE TABLE Alergenos_producto(
+id_alergeno_producto serial PRIMARY KEY,
+id_alergeno int,
+id_producto int,
+info_alergia text,
+FOREIGN KEY (id_alergeno) REFERENCES Alergenos(id_alergeno),
+FOREIGN KEY (id_producto) REFERENCES Producto(id_producto)
+);
