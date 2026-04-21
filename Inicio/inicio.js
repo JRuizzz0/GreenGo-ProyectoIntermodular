@@ -8,6 +8,7 @@ const footer = document.querySelector(".footer");
 const body = document.body;
 const modalTarjeta = document.getElementById("modalTarjeta");
 
+
 let productosOriginales = []; 
 
 async function obtenerProductos() {
@@ -26,21 +27,47 @@ function cargarProductos(lista) {
 
     lista.forEach(p => {
         contTarjetas.innerHTML += `
-            <div class="tarjeta">
+            <div class="tarjeta" onclick="abrirDetallePlato(${p.id})" style="cursor: pointer;">
                 <img src="${p.imagenUrl}" alt="${p.nombre}" class="imagen-plato">
                 <div class="titulo">${p.nombre}</div>
                 <p class="descripcion">${p.descripcion}</p>
                 <div class="precio-seccion">
                     ${(p.precioBase * 1.1).toFixed(2)}€ <small>(IVA inc.)</small>
                 </div>
-                <button onclick="comprar(${p.id})" id="btnComprar">Añadir al carrito</button>
+                <button onclick="event.stopPropagation(); comprar(${p.id})" class="btn-comprar">
+                    Añadir al carrito
+                </button>
             </div>
         `;
     });
 }
 
-
 obtenerProductos();
+
+function abrirDetallePlato(id) {
+    const producto = productosOriginales.find(p => p.id === id);
+
+    if (producto) {
+        document.getElementById("nombrePlato").innerText = producto.nombre;
+        
+       
+        document.getElementById("imgPlato").innerHTML = `<img src="${producto.imagenUrl}" alt="${producto.nombre}">`;
+        
+        const textoAlergenos = producto.alergeno.nombre || "Sin alérgenos";
+        document.getElementById("nombreAlergeno").innerText = `Contiene: ${textoAlergenos}`;
+        
+        document.getElementById("descAlergeno").innerText = producto.alergeno.descripcion || "";
+
+        document.getElementById("modalPlato").style.display = "flex";
+    }
+}
+
+
+document.querySelector(".btn-cerrar-plato").addEventListener("click", () => {
+    document.getElementById("modalPlato").style.display = "none";
+});
+
+
 
 btnBusqueda.addEventListener("click", () => {
     const textoBuscado = inputBusqueda.value.toLowerCase();
@@ -56,10 +83,6 @@ btnBusqueda.addEventListener("click", () => {
             tarjeta.style.display = "none";
         }
     });
-
-
-   
-
 
 });
 
@@ -83,13 +106,13 @@ selectorCategorias.addEventListener("change", () => {
 let carrito = [];
 
 function mostrarNotificacion(mensaje) {
-    const toast = document.getElementById("notificacion");
+    const noti = document.getElementById("notificacion");
     
     
-    toast.innerText = mensaje
-    toast.className = "notificacion-visible";
+    noti.innerText = mensaje
+    noti.className = "notificacion-visible";
     setTimeout(() => {
-        toast.className = "notificacion-oculta";
+        noti.className = "notificacion-oculta";
     }, 3000);
 }
 
@@ -134,37 +157,55 @@ document.getElementById("btnCarrito").addEventListener("click", () => {
     mostrarCarrito();
 });
 
+
+
+
+
 function mostrarCarrito() {
-    const contenedorModal = document.querySelector(".modal_content"); 
+   
+    const contenedorItems = document.getElementById("contenedorItemsCarrito"); 
     
     if (carrito.length === 0) {
-        contenedorModal.innerHTML = "<h3>Tu carrito está vacío</h3>";
+        contenedorItems.innerHTML = `
+            <h3>Tu carrito está vacío 🛒</h3>
+            <br>
+            <button class="btn-cerrar">Volver a la tienda</button>`;
         return;
     }
 
-    let html = "<h3>Tu Pedido</h3>";
+    let html = `
+        <h3>Tu Pedido</h3><br>`;
     let totalPagar = 0;
 
     carrito.forEach(item => {
         const subtotal = (item.precioBase * 1.1) * item.cantidad;
         totalPagar += subtotal;
         html += `
-            <div class="item-carrito">
-                <p>${item.nombre} x ${item.cantidad}</p>
+            <div class="item-carrito" style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                <p><strong>${item.nombre}</strong> x ${item.cantidad}</p>
                 <p>${subtotal.toFixed(2)}€</p>
-                <hr>
             </div>
-        `;
+            <hr>`;
     });
 
-    html += `<h4>Total: ${totalPagar.toFixed(2)}€</h4>`;
+    html += `<h4 >Total: ${totalPagar.toFixed(2)}€</h4>`;
     html += `<button class="btn-pagar">Finalizar Compra</button>`;
-    html += `<button class="btn-cerrar">Cerrar Carrito</button>`;
+    html += `<button class="btn-borrar">Vaciar Carrito</button>`;
+    html += `<button class="btn-cerrar">Cerrar</button>`;
     
-    contenedorModal.innerHTML = html;
+    contenedorItems.innerHTML = html;
 }
 
+
+document.getElementById("btnCarrito").addEventListener("click", () => {
+    
+    const modalCarro = document.getElementById("modalTarjeta");
+    modalCarro.style.display = "flex";
+    mostrarCarrito();
+});
+
 const btnCerrar = document.querySelector(".btn-cerrar");
+const btnBorrar = document.querySelector(".btn-borrar");
 
 
 
@@ -175,8 +216,15 @@ document.addEventListener("click", (event) => {
     }
 });
 
+document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("btn-borrar")) {
+        carrito = []
+        actualizarContador();
+        cerrarModal();
+    }
+});
+
 function cerrarModal() {
     modalTarjeta.style.display = "none";
-    carrito = [];
-    actualizarContador();
+    
 }
