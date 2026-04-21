@@ -11,6 +11,7 @@ public class Producto {
     private int stock;
     private Categoria categoria;
     private Impuesto impuesto;
+    private Alergenos alergeno;
 
 
     public Producto() {}
@@ -85,7 +86,14 @@ public class Producto {
         return categoria;
     }
 
+
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+    public Alergenos getAlergenos() {
+        return alergeno;
+    }
+    public void setAlergeno(Alergenos alergeno) {
+        this.alergeno = alergeno;
     }
 }
