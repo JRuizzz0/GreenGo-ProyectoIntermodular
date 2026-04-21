@@ -1,0 +1,195 @@
+/* Reset y Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Evita problemas con el padding */
+}
+
+body {
+    /* Fondo verde muy, muy pálido, casi blanco, para dar frescura */
+    background-color: #f1f8e9; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Texto principal en gris muy oscuro, mejor que negro puro */
+    color: #333; 
+}
+
+/* Contenedor */
+.container {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+    min-height: 100vh; /* Fuerza al footer a ir al fondo */
+}   
+
+
+.header {
+    grid-area: header;
+    /* Verde principal, vibrante y natural */
+    background-color: #4caf50; 
+    /* Texto en blanco puro para máximo contraste */
+    color: white; 
+    padding: 20px 50px;
+    display: flex; /* Flex es mejor para separar título de carrito */
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.main {
+    grid-area: main;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    padding: 40px 20px;
+    flex-wrap: wrap;
+}
+
+/* Estilos para registro e inicio */
+.registro,
+.inicio {
+    flex: 1;
+    min-width: 300px;
+    max-width: 450px;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.registro h1,
+.inicio h1 {
+    color: #4caf50;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+}
+
+.registro h2,
+.inicio h2 {
+    font-size: 0.9rem;
+    text-align: left;
+    margin: 15px 0 5px 0;
+    color: #555;
+}
+
+.registro input,
+.inicio input {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 2px solid #c5e1a5;
+    outline: none;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.registro input:focus,
+.inicio input:focus {
+    border-color: #4caf50;
+}
+
+.registro button,
+.inicio button {
+    width: 100%;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 25px;
+}
+
+.registro button:hover,
+.inicio button:hover {
+    background-color: #45a049;
+}
+
+/*Estilos de ambos modales*/
+#modalRegister, 
+#modalLogin {
+    display: none; /* Oculto por defecto para la funcion de js*/
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    backdrop-filter: blur(5px);
+    justify-content: center; 
+    align-items: center; 
+    z-index: 1000;
+}
+
+/* Estilos para el contenido dentro del modal de registro*/
+#aceptado {
+    font-size: 2rem;
+    color: #1b5e20;
+    font-family: 'Georgia', serif;
+    margin-bottom: 15px;
+    border: none; 
+}
+
+#slogan {
+    font-size: 1rem;
+    font-style: italic;
+    opacity: 0.9; /* Un poco transparente para no competir con el título */
+    margin-top: 5px;
+}
+#bienvenida {
+    font-size: 2rem;
+    color: #1b5e20;
+    font-family: 'Georgia', serif;
+    margin-bottom: 15px;
+    border: none;  
+}
+
+/* Estilo del boton cerrar del modal */
+#cerrarModal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.cerrarModal:hover {
+    color: black;
+}
+
+
+.footer {
+    grid-area: footer;
+    /* Mismo verde que el header para consistencia */
+    background-color: #4caf50; 
+    color: white;
+    text-align: center;
+    padding: 30px;
+    font-size: 0.95rem;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+}
+
+.footer p {
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+@media screen and (max-width: 768px) {
+    .main {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+    
+    .registro,
+    .inicio {
+        width: 100%;
+    }
+}
