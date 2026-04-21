@@ -31,7 +31,7 @@ public class UsuarioDAO {
             // Itera por cada fila devuelta por la consulta.
             while (rs.next()) {
                 // Obtiene los datos de cada columna ("id" y "nombre") y los imprime por consola.
-                System.out.println(rs.getInt("id") + " - " + rs.getString("nombre"));
+                System.out.println(rs.getInt("id") + " - " + rs.getString("usuario"));
             }
         } catch (Exception e) {
             // Si ocurre cualquier error (conexión, SQL, lectura), se imprime la traza para depurar.
@@ -62,6 +62,34 @@ public class UsuarioDAO {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+    public boolean comprobarUsuario(String body) {
+        Gson gson = new Gson();
+        JsonObject jsonBody = gson.fromJson(JsonParser.parseString(body), JsonObject.class);
+        String correo = jsonBody.get("correo").getAsString();
+        String contrasena = jsonBody.get("contrasena").getAsString();
+        String sql = "SELECT * FROM usuarios WHERE correo = ? AND contrasena = ?";
+
+        try (Connection conn = DatabaseConfig.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, correo);
+            stmt.setString(2, contrasena);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    System.out.println("Usuario encontrado: " + rs.getString("nombre"));
+                    return true;
+                } else {
+                    System.out.println("Correo o contraseña incorrecta");
+                    return false;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 

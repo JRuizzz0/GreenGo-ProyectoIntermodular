@@ -79,6 +79,13 @@ public class Main {
                         usuario.insertarUsuario(body);
                         sendResponse(exchange, 200, "{\"recibido\":\"ok\"}");
                     }
+                    else if (path.startsWith("/login")){
+                        String body = new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8);
+                        System.out.println(body);
+                        UsuarioDAO usuario = new UsuarioDAO();
+                        usuario.comprobarUsuario(body);
+                        sendResponse(exchange, 200, "{\"recibido\":\"ok\"}");
+                    }
                     else {
                         sendResponse(exchange, 404, "Endpoint POST no válido");
                     }
