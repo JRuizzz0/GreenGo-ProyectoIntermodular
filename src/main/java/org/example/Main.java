@@ -1,14 +1,12 @@
 package org.example;
 
 
-import com.google.gson.JsonArray;
 import com.sun.net.httpserver.HttpServer;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpExchange;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
-import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import com.google.gson.Gson;
@@ -76,15 +74,22 @@ public class Main {
                         String body = new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8);
                         System.out.println(body);
                         UsuarioDAO usuario = new UsuarioDAO();
-                        usuario.insertarUsuario(body);
-                        sendResponse(exchange, 200, "{\"recibido\":\"ok\"}");
+                        String mensaje = "Usuario registrado";
+                        if (!usuario.insertarUsuario(body)) {
+                            mensaje = "Correo o contraseña inválidos";
+                        }
+                        sendResponse(exchange, 200, "{\"recibido\":\""+mensaje+"\"}");
                     }
                     else if (path.startsWith("/login")){
                         String body = new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8);
                         System.out.println(body);
                         UsuarioDAO usuario = new UsuarioDAO();
-                        usuario.comprobarUsuario(body);
-                        sendResponse(exchange, 200, "{\"recibido\":\"ok\"}");
+                        String mensaje = "¡Bienvenido!";
+                        if (!usuario.comprobarUsuario(body)) {
+                            mensaje = "Usuario o contraseña incorrecta";
+                        }
+                        sendResponse(exchange, 200, "{\"recibido\":\""+mensaje+"\"}");
+
                     }
                     else {
                         sendResponse(exchange, 404, "Endpoint POST no válido");
