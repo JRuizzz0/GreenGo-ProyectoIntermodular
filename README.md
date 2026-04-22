@@ -132,3 +132,21 @@ INSERT INTO Alergenos_producto (id_alergeno, id_producto, info_alergia)
 VALUES ((SELECT id_alergeno FROM Alergenos WHERE nombre_alergeno = 'Sulfitos'), 
         (SELECT id_producto FROM Producto WHERE nombre = 'Vino Tinto Bio (Copa)'), 
         'Sulfitos naturales de la fermentación.');
+
+
+        CREATE TABLE Pedido (
+    id_pedido SERIAL PRIMARY KEY,
+    nombre_cliente VARCHAR(100) NOT NULL,
+    direccion VARCHAR(255) NOT NULL,
+    total DECIMAL(10,2) NOT NULL,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Líneas del ticket (Qué productos van dentro del pedido)
+CREATE TABLE Detalles_Pedido (
+    id_detalle SERIAL PRIMARY KEY,
+    id_pedido INT REFERENCES Pedido(id_pedido) ON DELETE CASCADE,
+    id_producto INT REFERENCES PRODUCTO(id_producto),
+    cantidad INT NOT NULL,
+    precio_unitario DECIMAL(10,2) NOT NULL
+);
