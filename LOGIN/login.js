@@ -2,19 +2,26 @@ const modalRegister = document.getElementById("modalRegister");
 const modalLogin = document.getElementById("modalLogin");
 const register = document.getElementById("register");
 const iniciar = document.getElementById("iniciar");
-const btnCerrar = document.getElementById("cerrarModal");
+const btnCerrarRegister = document.getElementById("cerrarModalRegister");
+const btnCerrarLogin = document.getElementById ("cerrarModalLogin");
+const cajaLogin = document.getElementById("cajaLogin");
+const cajaRegister = document.getElementById("cajaRegister");
+
 
 
 function cerrarModal() {
-    modalLogin.style.display = "none";
-    modalRegister.style.display = "none"
+    cajaLogin.style.display = "none";
+    cajaRegister.style.display = "none"
     // Limpiar los textos de los modales
     document.getElementById("aceptado").innerText = "";
     document.getElementById("bienvenida").innerText = "";
 }
-btnCerrar.addEventListener("click", function() {
+btnCerrarRegister.addEventListener("click", function() {
     cerrarModal();
 });
+btnCerrarLogin.addEventListener("click", function(){
+    cerrarModal();
+})
 
 
 // REGISTRO
@@ -31,19 +38,23 @@ register.addEventListener("click", function() {
         headers: { "Content-Type": "application/json" },
         body: JsonEnv
     })
-    .then(response => response.json())
-    .then(result => {
-      modalRegister.style.display = "flex";
-      document.getElementById("aceptado").innerText = `¡Bienvenido ${usuario}! Se ha registrado correctamente`;
-        
-        
-        // Limpiar campos
-        document.getElementById('regUsuario').value = "";
-        document.getElementById('regCorreo').value = "";
-        document.getElementById('regPassword').value = "";
-        
-    })
-    .catch(error => {
+    .then(async response => {
+    if (!response.ok) {
+        throw new Error(data.error || 'Error en la petición');
+    }
+    return response.json();
+})
+.then(data => {
+    console.log('Mensaje:', data);
+    cajaRegister.style.display = "flex";
+    document.getElementById("aceptado").innerText = data.recibido;
+
+    // Limpiar campos
+    document.getElementById('regUsuario').value = "";
+    document.getElementById('regCorreo').value = "";
+    document.getElementById('regPassword').value = "";
+})        
+.catch(error => {
         console.error("Error:", error);
     });
 });
@@ -65,10 +76,16 @@ iniciar.addEventListener("click", function() {
         headers: { "Content-Type": "application/json" },
         body: JsonCom
     })
-    .then(response => response.json())
-    .then(result => {
-        modalLogin.style.display = "flex";
-        document.getElementById("bienvenida").innerText = `¡Hola de nuevo ${usuario}! Has iniciado sesión`;
+    .then(async response => {
+    if (!response.ok) {
+        throw new Error(dato.error || 'Error en la petición');
+    }
+    return response.json();
+})
+    .then(dato => {
+        console.log('Mensaje: ' , dato)
+        cajaLogin.style.display = "flex";
+        document.getElementById("bienvenida").innerText = dato.recibido;
         
         
         // Limpiar campos

@@ -14,6 +14,7 @@
             <div id="contHeader">
                 <h1 id="titulo">GreenGo</h1>
                 <h3 id="slogan">Una buena alimentación es primordial para tu vida</h3>
+                <img src="img/GreenGo.jpg">
             </div>
         </header>
             <main class="main">
@@ -21,13 +22,12 @@
                 <h1>REGISTRO</h1>
                 <h2>Usuario</h2>
                 <input id="regUsuario"></input>
-                <h2>Correo</h2>
+                <h2>Correo [----@----.---]</h2>
                 <input id="regCorreo"></input>
-                <h2>Contraseña</h2>
+                <h2>Contraseña <small>[8 caracteres, mínimo 1 letra, 1 número y 1 símbolo]</small></h2>
                 <input id="regPassword" type="password"></input>
                 <button type="submit" id="register">Registrarse</button>
             </div>
-
             <div class="inicio">
                 <h1>INICIO SESIÓN</h1>
                 <h2>Usuario</h2>
@@ -48,12 +48,16 @@
     </div>
 
     <div id="modalRegister" class="modal">
-        <p id="aceptado"></p>
-        <button id="cerrarModal">Cerrar</button>
+        <div id="cajaRegister">
+            <p id="aceptado"></p>
+            <button id="cerrarModalRegister">Cerrar</button>
+        </div>
     </div>
     <div id="modalLogin" class="modal">   
-        <p id="bienvenida"></p>
-        <button id="cerrarModal">Cerrar</button>
+        <div id="cajaLogin">
+            <p id="bienvenida"></p>
+            <button id="cerrarModalLogin">Cerrar</button>
+        </div>
     </div>
 
     <script src="login.js" defer></script>
