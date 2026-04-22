@@ -19,7 +19,7 @@ public class ProductoDAO {
 
         String sql = """
     SELECT p.*, c.nombre AS cat_nombre, i.valor AS imp_valor, 
-           STRING_AGG(a.nombre_alergeno, ', ') AS nombres_alergenos
+           STRING_AGG(a.nombre_alergeno, ', ') AS nombres_alergenos, STRING_AGG(a.desc_alergeno, '\n') AS descripcion_alergeno
     FROM PRODUCTO p
     LEFT JOIN CATEGORIAS c ON p.id_categoria = c.id_categoria
     LEFT JOIN IMPUESTOS i ON p.id_impuesto = i.id_impuesto
@@ -62,11 +62,12 @@ public class ProductoDAO {
 
 
                 String listaNombres = rs.getString("nombres_alergenos");
+                String descripcionAlergeno = rs.getString("descripcion_alergeno");
 
 
                 if (listaNombres != null) {
                     a.setNombre(listaNombres);
-                    a.setDescripcion("Contiene: " + listaNombres);
+                    a.setDescripcion(descripcionAlergeno);
                 } else {
                     a.setNombre("Sin alérgenos");
                     a.setDescripcion("Producto libre de alérgenos comunes.");
