@@ -71,6 +71,29 @@
     </div>
 </div>
 
+<div id="modalPago" class="modal">
+    <div class="modal_content">
+        <span class="btn-cerrar-plato">&times;</span>
+        <h3>Finalizar Pedido</h3>
+        <p>Introduce tus datos para el envío</p>
+        
+        <form id="formPago">
+            
+            
+            <div class="tarjeta-datos">
+            <input type="text" id="nombreCliente" placeholder="Titular de la tarjeta">
+            <input type="text" id="direccion" placeholder="Dirección de entrega (Localidad, Calle...)" >
+            <input type="text" id="numTarjeta" placeholder="0000 0000 0000 0000" maxlength="16">
+            
+            <input type="text" id="mesCaducidad" placeholder="MM/AA" maxlength="5">
+            <input type="text" id="cvv" placeholder="CVV" maxlength="3">
+            </div>
+            
+            <h4 id="totalFinal"></h4>
+            <button type="submit" class="btn-pagar">Confirmar y Pagar</button>
+        </form>
+    </div>
+</div>
 
     <div id="notificacion" class="notificacion-oculta"></div>
 

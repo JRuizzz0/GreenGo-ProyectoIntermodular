@@ -56,7 +56,8 @@ function abrirDetallePlato(id) {
         const textoAlergenos = producto.alergeno.nombre || "Sin alérgenos";
         document.getElementById("nombreAlergeno").innerText = `Contiene: ${textoAlergenos}`;
         
-        document.getElementById("descAlergeno").innerText = producto.alergeno.descripcion || "";
+       const descAlergenos = producto.alergeno.descripcion || "";
+       document.getElementById("descAlergeno").innerText = `Descripción: ${descAlergenos}`
 
         document.getElementById("modalPlato").style.display = "flex";
     }
@@ -113,7 +114,7 @@ function mostrarNotificacion(mensaje) {
     noti.className = "notificacion-visible";
     setTimeout(() => {
         noti.className = "notificacion-oculta";
-    }, 3000);
+    }, 5000);
 }
 
 function comprar(id) {
@@ -181,7 +182,7 @@ function mostrarCarrito() {
         const subtotal = (item.precioBase * 1.1) * item.cantidad;
         totalPagar += subtotal;
         html += `
-            <div class="item-carrito" style="display:flex; justify-content:space-between; margin-bottom:10px;">
+            <div class="item-carrito">
                 <p><strong>${item.nombre}</strong> x ${item.cantidad}</p>
                 <p>${subtotal.toFixed(2)}€</p>
             </div>
@@ -228,3 +229,40 @@ function cerrarModal() {
     modalTarjeta.style.display = "none";
     
 }
+
+
+document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("btn-pagar")) {
+        
+        if (carrito.length > 0) {
+            abrirFormularioPago();
+        }
+    }
+});
+
+function abrirFormularioPago() {
+    document.getElementById("modalTarjeta").style.display = "none";
+
+    const total = carrito.reduce((acc, item) => acc + (item.precioBase * 1.1 * item.cantidad), 0);
+    document.getElementById("totalFinal").innerText = `Total a pagar: ${total.toFixed(2)}€`;
+
+   
+    document.getElementById("modalPago").style.display = "flex";
+}
+
+document.getElementById("formPago").addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    carrito = [];
+    localStorage.removeItem("carrito");
+    actualizarContador();
+    
+    document.getElementById("modalPago").style.display = "none";
+
+    mostrarNotificacion("¡Pedido confirmado! En camino a " + document.getElementById("direccion").value);
+    
+});
+
+document.querySelector("#modalPago .btn-cerrar-plato").addEventListener("click", () => {
+    document.getElementById("modalPago").style.display = "none";
+});
