@@ -38,39 +38,48 @@ register.addEventListener("click", function() {
         headers: { "Content-Type": "application/json" },
         body: JsonEnv
     })
-    .then(async response => {
-    if (!response.ok) {
-        throw new Error(data.error || 'Error en la petición');
-    }
-    return response.json();
-})
-.then(data => {
-    console.log('Mensaje:', data);
-    cajaRegister.style.display = "flex";
-    document.getElementById("aceptado").innerText = data.recibido;
-
-    // Limpiar campos
-    document.getElementById('regUsuario').value = "";
-    document.getElementById('regCorreo').value = "";
-    document.getElementById('regPassword').value = "";
-
-    window.location.href="../Inicio/inicio.html"
-})        
-
-
-.catch(error => {
-        console.error("Error:", error);
+    .then(response => response.json())
+    .then(data => {
+        console.log('Respuesta del backend:', data);
+        
+        const mensaje = data.recibido;
+        
+        cajaRegister.style.display = "flex";
+        const modalText = document.getElementById("aceptado");
+        modalText.innerText = mensaje;
+        
+        if (mensaje.includes("error")) {
+            
+            // Limpiar campos del formulario
+            document.getElementById('regUsuario').value = "";
+            document.getElementById('regCorreo').value = "";
+            document.getElementById('regPassword').value = "";
+            
+            // NO redirigir
+            return;
+        } else {
+            // Limpiar campos
+            document.getElementById('regUsuario').value = "";
+            document.getElementById('regCorreo').value = "";
+            document.getElementById('regPassword').value = "";
+            
+            // Aquí se redirige después de 2 segundos
+            setTimeout(() => {
+                window.location.href = "../Inicio/inicio.html";
+            }, 2000);
+        }
+    })
+    .catch(error => {
+        console.error("Error en la petición:", error);
+        cajaRegister.style.display = "flex";
+        const modalText = document.getElementById("aceptado");
+        modalText.innerText = "Error de conexión con el servidor";
     });
 });
-
 // INICIO DE SESIÓN
 iniciar.addEventListener("click", function() {
     const usuario = document.getElementById('logUsuario').value.trim();
     const contrasena = document.getElementById('logPassword').value.trim();
-
-    if (!usuario || !contrasena) {
-        return;
-    }
 
     const dato = { usuario, contrasena };
     const JsonCom = JSON.stringify(dato);
@@ -80,26 +89,38 @@ iniciar.addEventListener("click", function() {
         headers: { "Content-Type": "application/json" },
         body: JsonCom
     })
-    .then(async response => {
-    if (!response.ok) {
-        throw new Error(dato.error || 'Error en la petición');
-    }
-    return response.json();
-})
-    .then(dato => {
-        console.log('Mensaje: ' , dato)
+    .then(response => response.json())
+    .then(data => {
+        console.log('Respuesta del backend:', data);
+        
+        const mensaje = data.recibido;
+        
         cajaLogin.style.display = "flex";
-        document.getElementById("bienvenida").innerText = dato.recibido;
+        const modalText = document.getElementById("bienvenida");
+        modalText.innerText = mensaje;
         
-        
-        // Limpiar campos
-        document.getElementById('logUsuario').value = "";
-        document.getElementById('logPassword').value = "";
-        
-        window.location.href="../Inicio/inicio.html"
+        if (mensaje.includes("incorrecta") || mensaje.includes("error")) {
+            // Limpiar campos del formulario
+            document.getElementById('logUsuario').value = "";
+            document.getElementById('logPassword').value = "";
+            
+            return;
+        } else {
+            // Limpiar campos
+            document.getElementById('logUsuario').value = "";
+            document.getElementById('logPassword').value = "";
 
+            
+            // Aquí se redirige después de 2 segundos
+            setTimeout(() => {
+                window.location.href = "../Inicio/inicio.html";
+            }, 2000);
+        }
     })
     .catch(error => {
-        console.error("Error:", error);
+        console.error("Error en la petición:", error);
+        cajaLogin.style.display = "flex";
+        const modalText = document.getElementById("bienvenida");
+        modalText.innerText = "Error de conexión con el servidor";
     });
 });

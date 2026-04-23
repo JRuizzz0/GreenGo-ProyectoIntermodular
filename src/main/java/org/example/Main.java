@@ -83,22 +83,23 @@ public class Main {
                         String body = new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8);
                         System.out.println(body);
                         UsuarioDAO usuario = new UsuarioDAO();
-                        String mensaje = "Usuario registrado";
-                        if (!usuario.insertarUsuario(body)) {
-                            mensaje = "Correo o contraseña inválidos";
+
+                        if (usuario.insertarUsuario(body)) {
+                            sendResponse(exchange, 201, "{\"recibido\":\"Usuario registrado correctamente\"}");
+                        } else {
+                            sendResponse(exchange, 400, "{\"error\":\"Correo o contraseña inválidos\"}");
                         }
-                        sendResponse(exchange, 200, "{\"recibido\":\""+mensaje+"\"}");
                     }
                     else if (path.startsWith("/login")){
                         String body = new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8);
                         System.out.println(body);
                         UsuarioDAO usuario = new UsuarioDAO();
-                        String mensaje = "¡Bienvenido!";
-                        if (!usuario.comprobarUsuario(body)) {
-                            mensaje = "Usuario o contraseña incorrecta";
-                        }
-                        sendResponse(exchange, 200, "{\"recibido\":\""+mensaje+"\"}");
 
+                        if (usuario.comprobarUsuario(body)) {
+                            sendResponse(exchange, 200, "{\"recibido\":\"¡Bienvenido!\"}");
+                        } else {
+                            sendResponse(exchange, 401, "{\"recibido\":\"Usuario o contraseña incorrecta\"}");
+                        }
                     }
                     else {
                         sendResponse(exchange, 404, "Endpoint POST no válido");
