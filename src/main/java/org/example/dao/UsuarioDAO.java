@@ -61,8 +61,6 @@ public class UsuarioDAO {
                 stmt.setString(3, bcryptHashString);
                 stmt.executeUpdate();
 
-                System.out.println("Usuario insertado: " + usuario);
-                listarUsuarios();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -97,6 +95,7 @@ public class UsuarioDAO {
         return false;
     }
 
+
     public boolean comprobarUsuario(String body) {
         Gson gson = new Gson();
 
@@ -108,12 +107,11 @@ public class UsuarioDAO {
             boolean existe = existeUsuario(usuario, contrasena);
 
             if (existe) {
-                System.out.println("El usuario existe");
+                return true;
             } else {
-                System.out.println("El Usuario no existe");
+                return false;
             }
 
-            return existe;
 
         } catch (Exception e) {
             e.printStackTrace();
