@@ -53,7 +53,11 @@ register.addEventListener("click", function() {
     document.getElementById('regUsuario').value = "";
     document.getElementById('regCorreo').value = "";
     document.getElementById('regPassword').value = "";
+
+    window.location.href="../Inicio/inicio.html"
 })        
+
+
 .catch(error => {
         console.error("Error:", error);
     });
@@ -91,7 +95,9 @@ iniciar.addEventListener("click", function() {
         // Limpiar campos
         document.getElementById('logUsuario').value = "";
         document.getElementById('logPassword').value = "";
-      
+        
+        window.location.href="../Inicio/inicio.html"
+
     })
     .catch(error => {
         console.error("Error:", error);

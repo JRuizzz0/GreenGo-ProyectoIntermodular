@@ -45,7 +45,13 @@ body {
     margin-top: 5px;
 }
 
-#btnCarrito {
+.carrito {
+    display: flex;
+    align-items: center; 
+    gap: 10px; 
+}   
+
+#btnCarrito, #volver {
     background: white;
     color: #2e7d32;
     padding: 12px 24px;
@@ -55,9 +61,11 @@ body {
     box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
     border: 2px solid transparent;
+
 }
 
-#btnCarrito:hover {
+
+#btnCarrito:hover,#volver:hover {
     background: #2e7d32;
     color: white;
     transform: scale(1.05);

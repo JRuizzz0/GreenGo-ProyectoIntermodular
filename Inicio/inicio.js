@@ -2,6 +2,7 @@ const contTarjetas = document.getElementById("tarjetas");
 const inputBusqueda = document.getElementById("inpTexto");
 const btnBusqueda = document.getElementById("btnBusqueda");
 const selectorCategorias = document.getElementById("slcPlatos");
+const btnVolver = document.getElementById("volver");
 
 let productosOriginales = [];
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -216,6 +217,13 @@ btnBusqueda.addEventListener("click", () => {
         }
     });
 });
+
+btnVolver.addEventListener("click", ()=>{
+    window.location.href = "../LOGIN/login.html"
+})
+
+
+
 
 selectorCategorias.addEventListener("change", () => {
     const idSeleccionado = parseInt(selectorCategorias.value);
