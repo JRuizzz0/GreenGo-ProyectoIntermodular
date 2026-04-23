@@ -1,22 +1,21 @@
 package org.example.model;
 
+
 public class Usuario {
     private int id;
-    private String nombre;
-    private String apellidos;
-    private String email;
-    private String password;
-    private String telefono;
-    private String direccion;
-    private String rol;
+    private String usuario;
+    private String correo;
+    private String contrasena;
+
+
 
     public Usuario() {}
 
-    public Usuario(int id, String nombre, String email, String rol) {
+    public Usuario(int id, String usuario, String correo, String contrasena) {
         this.id = id;
-        this.nombre = nombre;
-        this.email = email;
-        this.rol = rol;
+        this.usuario = usuario;
+        this.correo = correo;
+        this.contrasena = contrasena;
     }
 
     public int getId() {
@@ -27,59 +26,27 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
-    public String getEmail() {
-        return email;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 }

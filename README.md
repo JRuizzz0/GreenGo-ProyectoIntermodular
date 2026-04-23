@@ -1,3 +1,4 @@
+https://trello.com/b/D7SDZZRH/mi-tablero-de-trello
 # GreenGo-ProyectoIntermodular
 
 
@@ -52,3 +53,101 @@ INSERT INTO PRODUCTO (nombre, descripcion, precio_base, imagen_url, stock, id_ca
 ('Limonada Casera con Menta', 'Zumo de limón natural, menta fresca y un toque de estevia.', 2.90, 'https://images.unsplash.com/photo-1523472721958-978152f4d69b?q=80&w=500', 40, 4, 2),
 ('Té Frío de Hibisco', 'Infusión natural de hibisco con frutos rojos y mucho hielo.', 3.20, 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?q=80&w=500', 35, 4, 2),
 ('Cerveza Artesana Local (Bio)', 'Cerveza rubia de producción ecológica y proximidad.', 4.50, 'https://images.unsplash.com/photo-1535958636474-b021ee887b13?q=80&w=500', 50, 4, 2);
+
+
+CREATE TABLE Alergenos(
+id_alergeno serial PRIMARY KEY,
+nombre_alergeno Varchar(100) NOT NULL,
+desc_alergeno TEXT Not null
+);
+
+CREATE TABLE Alergenos_producto(
+id_alergeno_producto serial PRIMARY KEY,
+id_alergeno int,
+id_producto int,
+info_alergia text,
+FOREIGN KEY (id_alergeno) REFERENCES Alergenos(id_alergeno),
+FOREIGN KEY (id_producto) REFERENCES Producto(id_producto)
+);
+
+-- 1. INSERTAR ALÉRGENOS COMUNES
+INSERT INTO Alergenos (nombre_alergeno, desc_alergeno) VALUES 
+('Gluten', 'Presente en cereales como trigo, cebada o centeno.'),
+('Frutos de cáscara', 'Incluye almendras, avellanas, nueces, anacardos, etc.'),
+('Soja', 'Muy común en productos vegetales como el tofu o tempeh.'),
+('Sésamo', 'Semillas de sésamo y productos derivados.'),
+('Mostaza', 'Presente en salsas y condimentos.'),
+('Apio', 'Incluye tallos, hojas, semillas y raíces.'),
+('Sulfitos', 'Conservantes presentes habitualmente en vinos y vinagres.');
+
+-- 2. RELACIONAR PRODUCTOS CON ALÉRGENOS
+-- Usamos subconsultas para que busque el ID por el nombre del plato
+
+-- Gazpacho (Sulfitos por el vinagre)
+INSERT INTO Alergenos_producto (id_alergeno, id_producto, info_alergia) 
+VALUES ((SELECT id_alergeno FROM Alergenos WHERE nombre_alergeno = 'Sulfitos'), 
+        (SELECT id_producto FROM Producto WHERE nombre = 'Gazpacho Andaluz Tradicional'), 
+        'Contiene vinagre de jerez con sulfitos.');
+
+-- Seitán al Horno (Gluten y Soja - El seitán es puro gluten)
+INSERT INTO Alergenos_producto (id_alergeno, id_producto, info_alergia) 
+VALUES ((SELECT id_alergeno FROM Alergenos WHERE nombre_alergeno = 'Gluten'), 
+        (SELECT id_producto FROM Producto WHERE nombre = 'Seitán al Horno con Patatas'), 
+        'El seitán es proteína de trigo.'),
+       ((SELECT id_alergeno FROM Alergenos WHERE nombre_alergeno = 'Soja'), 
+        (SELECT id_producto FROM Producto WHERE nombre = 'Seitán al Horno con Patatas'), 
+        'Marinado con salsa de soja.');
+
+-- Burger GreenGo (Gluten, Soja y Mostaza)
+INSERT INTO Alergenos_producto (id_alergeno, id_producto, info_alergia) 
+VALUES ((SELECT id_alergeno FROM Alergenos WHERE nombre_alergeno = 'Gluten'), 
+        (SELECT id_producto FROM Producto WHERE nombre = 'Burger GreenGo Especial'), 
+        'Pan de brioche artesanal.'),
+       ((SELECT id_alergeno FROM Alergenos WHERE nombre_alergeno = 'Soja'), 
+        (SELECT id_producto FROM Producto WHERE nombre = 'Burger GreenGo Especial'), 
+        'Proteína vegetal.'),
+       ((SELECT id_alergeno FROM Alergenos WHERE nombre_alergeno = 'Mostaza'), 
+        (SELECT id_producto FROM Producto WHERE nombre = 'Burger GreenGo Especial'), 
+        'Salsa secreta GreenGo.');
+
+-- Hummus de Remolacha (Sésamo)
+INSERT INTO Alergenos_producto (id_alergeno, id_producto, info_alergia) 
+VALUES ((SELECT id_alergeno FROM Alergenos WHERE nombre_alergeno = 'Sésamo'), 
+        (SELECT id_producto FROM Producto WHERE nombre = 'Hummus de Remolacha y Edamame'), 
+        'Contiene pasta de tahini.');
+
+-- Tarta de Queso Vegana (Frutos de cáscara)
+INSERT INTO Alergenos_producto (id_alergeno, id_producto, info_alergia) 
+VALUES ((SELECT id_alergeno FROM Alergenos WHERE nombre_alergeno = 'Frutos de cáscara'), 
+        (SELECT id_producto FROM Producto WHERE nombre = 'Tarta de Queso Vegana'), 
+        'Base elaborada con anacardos y dátiles.');
+
+-- Cerveza (Gluten)
+INSERT INTO Alergenos_producto (id_alergeno, id_producto, info_alergia) 
+VALUES ((SELECT id_alergeno FROM Alergenos WHERE nombre_alergeno = 'Gluten'), 
+        (SELECT id_producto FROM Producto WHERE nombre = 'Cerveza Artesana Local (Bio)'), 
+        'Malta de cebada.');
+
+-- Vino Tinto (Sulfitos)
+INSERT INTO Alergenos_producto (id_alergeno, id_producto, info_alergia) 
+VALUES ((SELECT id_alergeno FROM Alergenos WHERE nombre_alergeno = 'Sulfitos'), 
+        (SELECT id_producto FROM Producto WHERE nombre = 'Vino Tinto Bio (Copa)'), 
+        'Sulfitos naturales de la fermentación.');
+
+
+        CREATE TABLE Pedido (
+    id_pedido SERIAL PRIMARY KEY,
+    nombre_cliente VARCHAR(100) NOT NULL,
+    direccion VARCHAR(255) NOT NULL,
+    total DECIMAL(10,2) NOT NULL,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Líneas del ticket (Qué productos van dentro del pedido)
+CREATE TABLE Detalles_Pedido (
+    id_detalle SERIAL PRIMARY KEY,
+    id_pedido INT REFERENCES Pedido(id_pedido) ON DELETE CASCADE,
+    id_producto INT REFERENCES PRODUCTO(id_producto),
+    cantidad INT NOT NULL,
+    precio_unitario DECIMAL(10,2) NOT NULL
+);
