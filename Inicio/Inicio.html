@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="inicio.css">
+    <script src="inicio.js" defer></script>
+    <title>GreenGo - Inicio</title>
+</head>
+<body>
+    <div class="directorio-container">
+
+        <header class="header">
+            <div id="contHeader">
+                <h1 id="titulo">GreenGo</h1>
+                <h3 id="slogan">Una buena alimentación es primordial para tu vida</h3>
+            </div>
+
+            <section class="carrito">
+                <div id="btnCarrito">
+                    <p id="iCarrito">🛒 <span id="contador-carrito">0</span></p>
+                </div>
+            </section>
+        </header>
+
+        <main class="main">
+            <section class="filtrar">
+                <div id="contFiltros">
+                    <label for="inpTexto" style="display:none;">Buscar platos</label>
+                    <input type="text" id="inpTexto" placeholder="Buscar plato...">
+                    
+                    <button id="btnBusqueda">Buscar</button>
+
+                    <select name="platos" id="slcPlatos">
+                        <option value="0">Ver todos los platos</option> 
+                        <option value="1">Primeros platos</option>
+                        <option value="2">Segundos platos</option>
+                        <option value="3">Postres</option>
+                        <option value="4">Bebidas</option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="mainPlatos">
+                <div id="tarjetas">
+                    </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>© 2026 GreenGo. Todos los derechos reservados.<br>
+               Hecho por Jaime Ruiz, Marco Villamediana y Alejandro Verdugo.
+            </p>
+        </footer>
+
+    </div> 
+
+    <div id="modalPlato" class="modal">
+        <div class="modal_content">
+            <span class="btn-cerrar-plato">&times;</span>
+            <h2 id="nombrePlato"></h2>
+            <div id="imgPlato"></div>
+            <p id="nombreAlergeno" style="font-weight:bold; color:#e67e22;"></p>
+            <p id="descAlergeno"></p>
+        </div>
+    </div>
+
+    <div id="modalTarjeta" class="modal">
+        <div class="modal_content">
+            <div id="contenedorItemsCarrito"></div>
+        </div>
+    </div>
+
+    <div id="modalPago" class="modal">
+        <div class="modal_content">
+            <span class="btn-cerrar-plato">&times;</span>
+            <h3>Finalizar Pedido</h3>
+            <p>Introduce tus datos para el envío</p>
+            
+            <form id="formPago">
+                <div class="tarjeta-datos">
+                    <input type="text" id="nombreCliente" placeholder="Titular de la tarjeta" required>
+                    <input type="text" id="direccion" placeholder="Dirección de entrega (Localidad, Calle...)" required>
+                    <input type="text" id="numTarjeta" placeholder="0000 0000 0000 0000" maxlength="16" required pattern="\d*">
+                    
+                    <input type="text" id="mesCaducidad" placeholder="MM/AA" maxlength="5" required>
+                    <input type="text" id="cvv" placeholder="CVV" maxlength="3" required pattern="\d{3}">
+                </div>
+                
+                <h4 id="totalFinal"></h4>
+                <button type="submit" class="btn-pagar">Confirmar y Pagar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="notificacion" class="notificacion-oculta"></div>
+
+</body>
+</html>
