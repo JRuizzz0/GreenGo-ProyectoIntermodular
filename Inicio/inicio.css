@@ -51,6 +51,14 @@ body {
     gap: 10px; 
 }   
 
+.btn-eliminar-item{
+    background:none;
+     border:none; 
+     font-size:1.5rem; 
+     cursor:pointer; 
+     transition: transform 0.2s;
+}
+
 #btnCarrito, #volver {
     background: white;
     color: #2e7d32;

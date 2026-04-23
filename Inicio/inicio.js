@@ -118,18 +118,24 @@ function mostrarCarrito() {
     carrito.forEach(item => {
         const subtotal = (item.precioBase * 1.1) * item.cantidad;
         totalPagar += subtotal;
+        
         html += `
-            <div class="item-carrito" style="display:flex; justify-content:space-between; margin-bottom:10px;">
-                <p><strong>${item.nombre}</strong> x ${item.cantidad}</p>
-                <p>${subtotal.toFixed(2)}€</p>
+            <div class="item-carrito" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                <div style="flex-grow: 1; text-align: left;">
+                    <p><strong>${item.nombre}</strong></p>
+                    <p style="font-size: 0.9em; color: #666;">Cant: ${item.cantidad} x ${(item.precioBase * 1.1).toFixed(2)}€</p>
+                </div>
+                <div style="display:flex; align-items:center; gap: 15px;">
+                    <p style="font-weight:bold;">${subtotal.toFixed(2)}€</p>
+                    <button class="btn-eliminar-item" data-id="${item.id}" title="Quitar plato">🗑️</button>
+                </div>
             </div>
             <hr style="opacity:0.2; margin-bottom:10px;">`;
     });
 
     html += `<h4 style="text-align:right; margin-top:15px;">Total: ${totalPagar.toFixed(2)}€</h4>`;
     html += `<button class="btn-pagar">Finalizar Compra</button>`;
-    html += `<button class="btn-borrar">Vaciar Carrito</button>`;
-    html += `<button class="btn-cerrar">Cerrar</button>`;
+    html += `<button class="btn-borrar">Vaciar todo el Carrito</button>`;
     
     contenedorItems.innerHTML = html;
 }
@@ -154,6 +160,14 @@ document.addEventListener("click", (e) => {
         guardarCarrito();
         cerrarTodosLosModales();
         mostrarNotificacion("Carrito vaciado 🗑️");
+    }
+    
+    if (e.target.classList.contains("btn-eliminar-item")) {
+        
+        const idProducto = parseInt(e.target.getAttribute("data-id"));
+        carrito = carrito.filter(item => item.id !== idProducto);
+        guardarCarrito();
+        mostrarCarrito(); 
     }
     
     if (e.target.classList.contains("btn-pagar")) {
