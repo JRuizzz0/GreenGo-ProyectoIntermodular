@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registro / Iniciar sesión</title>
+    </head>
+    
+    <div class="container">
+        <body>
+
+            
+        <header class="header">
+            <div id="contHeader">
+                <h1 id="titulo">GreenGo</h1>
+                <h3 id="slogan">Una buena alimentación es primordial para tu vida</h3>
+                <img src="img/GreenGo.jpg">
+            </div>
+        </header>
+            <main class="main">
+            <div class="registro">
+                <h1>REGISTRO</h1>
+                <h2>Usuario</h2>
+                <input id="regUsuario"></input>
+                <h2>Correo [----@----.---]</h2>
+                <input id="regCorreo"></input>
+                <h2>Contraseña <small>[8 caracteres, mínimo 1 letra, 1 número y 1 símbolo]</small></h2>
+                <input id="regPassword" type="password"></input>
+                <button type="submit" id="register">Registrarse</button>
+            </div>
+            <div class="inicio">
+                <h1>INICIO SESIÓN</h1>
+                <h2>Usuario</h2>
+                <input id="logUsuario"></input>
+                <h2>Contraseña</h2>
+                <input id="logPassword" type="password"></input>
+                <button type="submit" id="iniciar">Entrar</button>
+            </div>
+            </main>
+
+        <footer class="footer">
+            <p>© 2026 GreenGo. Todos los derechos reservados.<br>
+                Hecho por Jaime Ruiz, Marco Villamediana y Alejandro Verdugo.
+            </p>
+        </footer>
+
+        </body>    
+    </div>
+
+    <div id="modalRegister" class="modal">
+        <div id="cajaRegister">
+            <p id="aceptado"></p>
+            <button id="cerrarModalRegister">Cerrar</button>
+        </div>
+    </div>
+    <div id="modalLogin" class="modal">   
+        <div id="cajaLogin">
+            <p id="bienvenida"></p>
+            <button id="cerrarModalLogin">Cerrar</button>
+        </div>
+    </div>
+
+    <script src="login.js" defer></script>
+    <link rel="stylesheet" href="login.css">
+</html>
