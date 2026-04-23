@@ -72,19 +72,40 @@ public class UsuarioDAO {
         }
 
     }
-    public boolean existeUsuario(String usuario, String contrasena) {
-        String sql = "SELECT COUNT(*) FROM usuarios WHERE usuario = ? AND contrasena = ?";
+    public boolean comprobarUsuario(String body) {
+        Gson gson = new Gson();
+
+        try {
+            JsonObject jsonBody = gson.fromJson(body, JsonObject.class);
+            String usuario = jsonBody.get("usuario").getAsString();
+            String contrasenaPlano = jsonBody.get("contrasena").getAsString();
+
+            String hashBD = getHashPasswordPorUsuario(usuario);
+
+            if (hashBD == null) {
+                return false;
+            }
+
+            BCrypt.Result result = BCrypt.verifyer().verify(contrasenaPlano.getBytes(), hashBD.getBytes());
+            return result.verified;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public String getHashPasswordPorUsuario(String usuario) {
+        String sql = "SELECT contrasena FROM usuarios WHERE usuario = ?";
 
         try (Connection conn = DatabaseConfig.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, usuario);
-            stmt.setString(2, contrasena);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    int count = rs.getInt(1);
-                    return count > 0;
+                    return rs.getString("contrasena");
                 }
             }
 
@@ -92,31 +113,7 @@ public class UsuarioDAO {
             e.printStackTrace();
         }
 
-        return false;
-    }
-
-
-    public boolean comprobarUsuario(String body) {
-        Gson gson = new Gson();
-
-        try {
-            JsonObject jsonBody = gson.fromJson(body, JsonObject.class);
-            String usuario = jsonBody.get("usuario").getAsString();
-            String contrasena = jsonBody.get("contrasena").getAsString();
-
-            boolean existe = existeUsuario(usuario, contrasena);
-
-            if (existe) {
-                return true;
-            } else {
-                return false;
-            }
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        return null;
     }
 
     public boolean findByEmail(String EmailBuscado) {
