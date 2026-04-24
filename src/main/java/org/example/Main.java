@@ -87,7 +87,7 @@ public class Main {
                         if (usuario.insertarUsuario(body)) {
                             sendResponse(exchange, 201, "{\"recibido\":\"Usuario registrado correctamente\"}");
                         } else {
-                            sendResponse(exchange, 400, "{\"error\":\"Correo o contraseña inválidos\"}");
+                            sendResponse(exchange, 400, "{\"recibido\":\"Correo o contraseña inválidos\"}");
                         }
                     }
                     else if (path.startsWith("/login")){
