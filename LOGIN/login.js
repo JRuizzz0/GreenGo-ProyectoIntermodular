@@ -48,7 +48,7 @@ register.addEventListener("click", function() {
         const modalText = document.getElementById("aceptado");
         modalText.innerText = mensaje;
         
-        if (mensaje.includes("error")) {
+        if (mensaje.includes("inválidos") || mensaje.includes("error")) {
             
             // Limpiar campos del formulario
             document.getElementById('regUsuario').value = "";
