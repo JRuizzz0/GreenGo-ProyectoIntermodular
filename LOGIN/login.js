@@ -43,7 +43,6 @@ register.addEventListener("click", function() {
         console.log('Respuesta del backend:', data);
         
         const mensaje = data.recibido;
-        
         cajaRegister.style.display = "flex";
         const modalText = document.getElementById("aceptado");
         modalText.innerText = mensaje;
