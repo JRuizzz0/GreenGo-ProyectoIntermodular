@@ -109,4 +109,10 @@ Para ejecutarlo:
 
 -Una vez estemos en la clase login.html, pulsamos en el botón **Go Live** y se nos abrirá la página web <img width="1690" height="993" alt="image" src="https://github.com/user-attachments/assets/1ab211bd-b9e0-47e4-b3a1-b63df4ed1a9a" />
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Con todo esto, solo queda registrarse/iniciar sesión y empezar el pedido. ¡Bienvenido a la familia GreenGo!<img width="1913" height="1029" alt="image" src="https://github.com/user-attachments/assets/e7fd3226-20fd-4341-9625-91cc55c0bf47" />
+
+
 
