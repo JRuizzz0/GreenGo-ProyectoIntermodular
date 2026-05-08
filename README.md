@@ -18,12 +18,12 @@ Tras tenerlo instalado, debemo seguir los siguientes pasos:
 <img width="697" height="546" alt="image" src="https://github.com/user-attachments/assets/42cce1e6-7249-4f49-9484-c55871c555bf" />
 
 
--Tras ello, se nos habrá creado una base de datos (con nombre GreenGo). Pulsamos click derecho encima del nombre y pulsamos en Query Tool
+-Tras ello, se nos habrá creado una base de datos (con nombre GreenGo). Pulsamos click derecho encima del nombre y pulsamos en **Query Tool**
 <img width="344" height="25" alt="image" src="https://github.com/user-attachments/assets/699cc90e-23d6-45d4-974a-4c980f753653" />
 <img width="304" height="427" alt="image" src="https://github.com/user-attachments/assets/2b47207d-ffc6-42d5-a832-050e7a70fb9d" />
 
 
--Una vez hecho esto, se nos abrirá una página al lado donde tendremos que insertar todos los Scripts del documento de base de datos
+-Una vez hecho esto, se nos abrirá una página al lado donde tendremos que insertar todos los Scripts del documento de base de datos (descargar el .docx dentro de la carpeta **Green-Go_Memoria_BBDD**)
 <img width="518" height="420" alt="image" src="https://github.com/user-attachments/assets/908e976f-26a6-49f4-bfd1-4e46fc9b0506" />
 -Copiamos todas las lineas de Scripts y de Inserts
 <img width="377" height="307" alt="image" src="https://github.com/user-attachments/assets/508bfe31-9eba-400f-acbc-2bcc839033dc" />
