@@ -115,4 +115,23 @@ Para ejecutarlo:
 Con todo esto, solo queda registrarse/iniciar sesión y empezar el pedido. ¡Bienvenido a la familia GreenGo!<img width="1913" height="1029" alt="image" src="https://github.com/user-attachments/assets/e7fd3226-20fd-4341-9625-91cc55c0bf47" />
 
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**1. GitHub**
+
+GitHub permite gestionar el historial de cambios del código fuente, registrando cada modificación para garantizar la trazabilidad y la posibilidad de revertir versiones cuando sea necesario. Además, facilita el trabajo en equipo mediante el uso de ramas, pull requests y revisiones de código, lo que mejora la calidad y la organización del desarrollo. Por otro lado, el repositorio remoto actúa como respaldo en la nube, asegurando que el código esté siempre accesible desde cualquier equipo.
+
+**2. IntelliJ IDEA**
+
+Este IDE ofrece soporte específico para el lenguaje o framework del proyecto, con análisis de código en tiempo real, autocompletado avanzado y refactorizaciones seguras. Se integra fácilmente con GitHub (commit, push, pull), con sistemas de build y con servidores de aplicaciones. Gracias a sus atajos de teclado, inspecciones de código y sugerencias inteligentes, IntelliJ IDEA reduce errores y acelera el desarrollo, aumentando significativamente la productividad.
+
+**3. Visual Studio Code**
+
+Visual Studio Code se utilizó como editor complementario para tareas en las que IntelliJ no resultaba tan ágil o liviano. Por ejemplo, permite la edición rápida de archivos de configuración (JSON, YAML, XML), abriéndolos de forma instantánea y con un buen resaltado de sintaxis. Además, su terminal integrada y el soporte para control de versiones facilitan la ejecución de comandos Git, npm, pip, etc., desde la misma interfaz.
+
+**4. pgAdmin**
+
+Se empleó pgAdmin como interfaz gráfica para administrar la base de datos PostgreSQL. Ofrece una gestión visual completa: crear, modificar y eliminar tablas, índices, vistas, secuencias y procedimientos almacenados sin necesidad de escribir SQL manualmente. Su editor de consultas incluye resaltado de sintaxis, autocompletado y explicación visual de planes de ejecución, lo que simplifica la depuración de consultas complejas. Al ser una herramienta cliente multiplataforma, permite trabajar con bases de datos PostgreSQL locales o remotas desde cualquier sistema operativo.
+
+
 
