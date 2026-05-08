@@ -23,9 +23,9 @@ Tras tenerlo instalado, debemo seguir los siguientes pasos:
 <img width="304" height="427" alt="image" src="https://github.com/user-attachments/assets/2b47207d-ffc6-42d5-a832-050e7a70fb9d" />
 
 
--Una vez hecho esto, se nos abrirá una página al lado donde tendremos que insertar todos los Scripts del documento de base de datos (descargar el .docx dentro de la carpeta **Green-Go_Memoria_BBDD**)
+-Una vez hecho esto, se nos abrirá una página al lado donde tendremos que insertar todos los Scripts del documento de base de datos 
 <img width="518" height="420" alt="image" src="https://github.com/user-attachments/assets/908e976f-26a6-49f4-bfd1-4e46fc9b0506" />
--Copiamos todas las lineas de Scripts y de Inserts
+-Copiamos todas las lineas de Scripts y de Inserts (descargar el .docx dentro de la carpeta **Green-Go_Memoria_BBDD**)
 <img width="377" height="307" alt="image" src="https://github.com/user-attachments/assets/508bfe31-9eba-400f-acbc-2bcc839033dc" />
 
 
