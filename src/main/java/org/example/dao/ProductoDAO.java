@@ -1,6 +1,5 @@
 package org.example.dao;
 
-
 import org.example.config.DatabaseConfig;
 import org.example.model.Alergenos;
 import org.example.model.Categoria;
@@ -11,11 +10,18 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Operaciones de base de datos para la gestión de productos.
+ */
 public class ProductoDAO {
 
+    /**
+     * Obtiene la lista completa de productos con sus categorías, impuestos y alérgenos.
+     *
+     * @return Lista de objetos Producto.
+     */
     public List<Producto> listarTodos() {
         List<Producto> productos = new ArrayList<>();
-
 
         String sql = """
     SELECT p.*, c.nombre AS cat_nombre, i.valor AS imp_valor, 
@@ -28,7 +34,6 @@ public class ProductoDAO {
     GROUP BY p.id_producto, c.nombre, i.valor
     ORDER BY p.id_categoria ASC
     """;
-
 
         try (Connection conn = DatabaseConfig.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
@@ -57,13 +62,10 @@ public class ProductoDAO {
 
                 // Alérgenos
                 Alergenos a = new Alergenos();
-
                 a.setId(0);
-
 
                 String listaNombres = rs.getString("nombres_alergenos");
                 String descripcionAlergeno = rs.getString("descripcion_alergeno");
-
 
                 if (listaNombres != null) {
                     a.setNombre(listaNombres);
@@ -74,7 +76,6 @@ public class ProductoDAO {
                 }
 
                 p.setAlergeno(a);
-
                 productos.add(p);
             }
         } catch (SQLException e) {

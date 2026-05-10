@@ -6,14 +6,22 @@ import org.example.model.Pedido;
 
 import java.sql.*;
 
+/**
+ * Operaciones de base de datos para la gestión de pedidos.
+ */
 public class PedidoDAO {
 
+    /**
+     * Guarda un pedido y todos sus detalles de forma relacionada.
+     *
+     * @param pedido Objeto Pedido con la información a registrar.
+     * @return true si el proceso fue exitoso, false si hubo un error.
+     */
     public boolean guardarPedidoCompleto(Pedido pedido) {
         String sqlPedido = "INSERT INTO Pedido (nombre_cliente, direccion, total) VALUES (?, ?, ?) RETURNING id_pedido";
         String sqlDetalle = "INSERT INTO Detalles_Pedido (id_pedido, id_producto, cantidad, precio_unitario) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConfig.getConnection()) {
-
 
             try (PreparedStatement ps = conn.prepareStatement(sqlPedido)) {
                 ps.setString(1, pedido.getNombreCliente());
@@ -23,8 +31,7 @@ public class PedidoDAO {
                 ResultSet rs = ps.executeQuery();
 
                 if (rs.next()) {
-                    int idGenerado = rs.getInt("id_pedido"); // Obtenemos el ID del nuevo ticket
-
+                    int idGenerado = rs.getInt("id_pedido");
 
                     try (PreparedStatement psDetalle = conn.prepareStatement(sqlDetalle)) {
                         for (LineaPedido linea : pedido.getLineas()) {
