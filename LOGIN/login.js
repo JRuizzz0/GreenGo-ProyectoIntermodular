@@ -8,7 +8,7 @@ const cajaLogin = document.getElementById("cajaLogin");
 const cajaRegister = document.getElementById("cajaRegister");
 
 
-
+// Función para cerrar los modales 
 function cerrarModal() {
     cajaLogin.style.display = "none";
     cajaRegister.style.display = "none"
@@ -16,6 +16,8 @@ function cerrarModal() {
     document.getElementById("aceptado").innerText = "";
     document.getElementById("bienvenida").innerText = "";
 }
+
+// Aplicamos la función "cerrarModal" al pulsar en el botón del modal ("x")
 btnCerrarRegister.addEventListener("click", function() {
     cerrarModal();
 });
@@ -26,13 +28,14 @@ btnCerrarLogin.addEventListener("click", function(){
 
 // REGISTRO
 register.addEventListener("click", function() {
+    // Obtenemos los valores del forumlario de registro
     const usuario = document.getElementById('regUsuario').value.trim();
     const correo = document.getElementById('regCorreo').value.trim();
     const contrasena = document.getElementById('regPassword').value.trim();
-
+    // Definimos los datos para enviarlos al backend
     const data = { usuario, correo, contrasena };
     const JsonEnv = JSON.stringify(data);
-
+    // Enviamos una solicitud "POST" al endpoint del registro
     fetch("http://localhost:8080/registro", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -49,7 +52,7 @@ register.addEventListener("click", function() {
         
         if (mensaje.includes("error")) {
             
-            // Limpiar campos del formulario
+            // Limpiamos los campos del formulario
             document.getElementById('regUsuario').value = "";
             document.getElementById('regCorreo').value = "";
             document.getElementById('regPassword').value = "";
@@ -57,7 +60,7 @@ register.addEventListener("click", function() {
             // NO redirigir
             return;
         } else {
-            // Limpiar campos
+            // Limpiamos los campos y redirigimos al inicio (registro correcto)
             document.getElementById('regUsuario').value = "";
             document.getElementById('regCorreo').value = "";
             document.getElementById('regPassword').value = "";
@@ -77,12 +80,13 @@ register.addEventListener("click", function() {
 });
 // INICIO DE SESIÓN
 iniciar.addEventListener("click", function() {
+    // Obtenemos los valores del formulario del Login
     const usuario = document.getElementById('logUsuario').value.trim();
     const contrasena = document.getElementById('logPassword').value.trim();
-
+    // Definimos los datos para enviarlos al backend
     const dato = { usuario, contrasena };
     const JsonCom = JSON.stringify(dato);
-
+    // Enviamos una solicitud "POST" al endpoint del Login
     fetch("http://localhost:8080/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -99,13 +103,14 @@ iniciar.addEventListener("click", function() {
         modalText.innerText = mensaje;
         
         if (mensaje.includes("incorrecta") || mensaje.includes("error")) {
-            // Limpiar campos del formulario
+            // Limpiamos los campos del formulario
             document.getElementById('logUsuario').value = "";
             document.getElementById('logPassword').value = "";
             
+            // NO redirigir
             return;
         } else {
-            // Limpiar campos
+            // Limpiamos los campos y redirigimos al inicio (login correcto)
             document.getElementById('logUsuario').value = "";
             document.getElementById('logPassword').value = "";
 
