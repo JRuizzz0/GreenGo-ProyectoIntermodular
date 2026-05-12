@@ -7,6 +7,7 @@ const btnVolver = document.getElementById("volver");
 let productosOriginales = [];
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
+// Aquí obtenemos los productos desde el backend
 async function obtenerProductos() {
     try {
         const respuesta = await fetch('http://localhost:8080/api/productos');
@@ -18,6 +19,7 @@ async function obtenerProductos() {
     }
 }
 
+// Función para renderizar las tarjetas de productos en el contenedor
 function cargarProductos(lista) {
     contTarjetas.innerHTML = "";
     
@@ -38,6 +40,7 @@ function cargarProductos(lista) {
     });
 }
 
+// Función para mostrar el modal con los detalles completos del plato seleccionado
 function abrirDetallePlato(id) {
     const producto = productosOriginales.find(p => p.id === id);
     
@@ -54,6 +57,7 @@ function abrirDetallePlato(id) {
     }
 }
 
+// Función para mostrar la notificación de añadir al carrito
 function mostrarNotificacion(mensaje) {
     const noti = document.getElementById("notificacion");
     noti.innerText = mensaje;
@@ -64,6 +68,7 @@ function mostrarNotificacion(mensaje) {
     }, 3000);
 }
 
+// Función para agregar el producto al carrito
 function comprar(id) {
     const producto = productosOriginales.find(p => p.id === id);
     const existe = carrito.find(item => item.id === id);
@@ -81,11 +86,13 @@ function comprar(id) {
     mostrarNotificacion(`${producto.nombre} añadido`);
 }
 
+// Función para guardar el carrito en localStorage y actualiza el contador
 function guardarCarrito() {
     localStorage.setItem("carrito", JSON.stringify(carrito));
     actualizarContador();
 }
 
+// Función para actualizar el contador de productos del carrito
 function actualizarContador() {
     const contador = document.getElementById("contador-carrito");
     if (contador) {
@@ -94,11 +101,13 @@ function actualizarContador() {
     }
 }
 
+// Abrimos el modal del carrito al hacer click en el botón
 document.getElementById("btnCarrito").addEventListener("click", () => {
     document.getElementById("modalTarjeta").style.display = "flex";
     mostrarCarrito();
 });
 
+// Función para renderizar el contenido actual del carrito dentro del modal
 function mostrarCarrito() {
     const contenedorItems = document.getElementById("contenedorItemsCarrito");
     
@@ -140,12 +149,14 @@ function mostrarCarrito() {
     contenedorItems.innerHTML = html;
 }
 
+// Función para cerrar los modales
 function cerrarTodosLosModales() {
     document.querySelectorAll(".modal").forEach(modal => {
         modal.style.display = "none";
     });
 }
 
+// Controla todas las acciones del carrito: vaciar, quitar producto y proceder al pago
 document.addEventListener("click", (e) => {
     if (typeof e.target.className === 'string' && e.target.className.includes("cerrar")) {
         cerrarTodosLosModales();
@@ -182,6 +193,7 @@ document.addEventListener("click", (e) => {
     }
 });
 
+// Envía el pedido al backend 
 document.getElementById("formPago").addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -217,6 +229,7 @@ document.getElementById("formPago").addEventListener("submit", async (e) => {
     }
 });
 
+// Busca y filtra platos por nombre según lo que el usuario escribe en el campo de búsqueda
 btnBusqueda.addEventListener("click", () => {
     const textoBuscado = inputBusqueda.value.toLowerCase();
     const tarjetasCargadas = document.querySelectorAll(".tarjeta");
@@ -232,13 +245,12 @@ btnBusqueda.addEventListener("click", () => {
     });
 });
 
+// Funcionalidad del botón "volver" para que rediriga al login
 btnVolver.addEventListener("click", ()=>{
     window.location.href = "../LOGIN/login.html"
 })
 
-
-
-
+// Filtramos los productos por categoría seleccionada
 selectorCategorias.addEventListener("change", () => {
     const idSeleccionado = parseInt(selectorCategorias.value);
 
@@ -250,4 +262,5 @@ selectorCategorias.addEventListener("change", () => {
     }
 });
 
+//Inicializamos la aplicación
 obtenerProductos();
