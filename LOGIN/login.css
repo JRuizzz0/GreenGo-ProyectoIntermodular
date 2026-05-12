@@ -2,7 +2,7 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Evita problemas con el padding */
+    box-sizing: border-box; /* Evitamos problemas con el padding */
 }
 
 body {
@@ -12,7 +12,6 @@ background-image: url('img/Gente_sana.jpg');
     background-attachment: fixed;
     background-repeat: no-repeat;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* Texto principal en gris muy oscuro, mejor que negro puro */
     color: #333; 
 }
 
@@ -39,15 +38,13 @@ body::before {
     min-height: 100vh; /* Fuerza al footer a ir al fondo */
 }   
 
-
+/* Header */
 .header {
     grid-area: header;
-    /* Verde principal, vibrante y natural */
     background-color: #4caf50; 
-    /* Texto en blanco puro para máximo contraste */
     color: white; 
     padding: 20px 50px;
-    display: flex; /* Flex es mejor para separar título de carrito */
+    display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -193,7 +190,6 @@ body::before {
 
 .footer {
     grid-area: footer;
-    /* Mismo verde que el header para consistencia */
     background-color: #4caf50; 
     color: white;
     text-align: center;
@@ -207,6 +203,7 @@ body::before {
     line-height: 1.6;
 }
 
+/* Media queries (responsive)*/
 @media screen and (max-width: 768px) {
     .main {
         flex-direction: column;
