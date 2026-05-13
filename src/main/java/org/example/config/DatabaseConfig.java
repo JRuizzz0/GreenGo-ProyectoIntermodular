@@ -16,7 +16,7 @@ public class DatabaseConfig {
     private static final String USERNAME = "postgres";
 
     /** Contraseña de acceso. */
-    private static final String PASSWORD = "1234";
+    private static final String PASSWORD = "postgres";
 
     /**
      * Establece y devuelve la conexión con la base de datos.
