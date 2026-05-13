@@ -33,19 +33,19 @@ public class Main {
     public static void main(String[] args) {
         try {
             HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
-
-            // Configuración de rutas (endpoints)
             server.createContext("/login", new UsuarioHandler());
             server.createContext("/registro", new UsuarioHandler());
             server.createContext("/api/productos", new ProductoHandler());
             server.createContext("/api/pedidos", new PedidoHandler());
-
             server.setExecutor(null);
             server.start();
-
             DatabaseConfig.getConnection();
             System.out.println("Conexión correcta a PostgreSQL.");
             System.out.println("Servidor GreenGo iniciado en http://localhost:8080");
+            System.out.println("Endpoint de login: http://localhost:8080/login");
+            System.out.println("Endpoint de registro: http://localhost:8080/registro");
+            System.out.println("Endpoint de productos: http://localhost:8080/api/productos");
+            System.out.println("Endpoint de pedidos: http://localhost:8080/api/pedidos");
 
         } catch (Exception e) {
             System.out.println("Error 503: Servidor no iniciado.");
@@ -61,23 +61,66 @@ public class Main {
         private Gson gson = new Gson();
 
         /**
-         * Gestiona peticiones GET y POST para usuarios.
-         *
-         * @param exchange Objeto de intercambio HTTP.
-         * @throws IOException Si ocurre un error de E/S.
+         * Procesa las peticiones de autenticación y registro de usuarios.
          */
         @Override
         public void handle(HttpExchange exchange) throws IOException {
-            // Lógica de manejo de rutas y métodos HTTP
+            String path = exchange.getRequestURI().getPath();
+            List<Usuario> usuarios = service.obtenerUsuarios();
+            String json = gson.toJson(usuarios);
+            String method = exchange.getRequestMethod();
+
+            // Configuración de CORS
+            exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+            exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+            exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type");
+
+            if (method.equalsIgnoreCase("OPTIONS")) {
+                exchange.sendResponseHeaders(204, -1);
+                return;
+            }
+
+            try {
+                if (method.equalsIgnoreCase("GET")) {
+                    // Lógica para GET si fuera necesaria
+                } else if (method.equalsIgnoreCase("POST")) {
+                    if (path.startsWith("/registro")) {
+                        String body = new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8);
+                        UsuarioDAO usuario = new UsuarioDAO();
+                        if (usuario.insertarUsuario(body)) {
+                            sendResponse(exchange, 201, "{\"recibido\":\"Usuario registrado correctamente\"}");
+                        } else {
+                            sendResponse(exchange, 400, "{\"recibido\":\"Correo o contraseña inválidos\"}");
+                        }
+                    } else if (path.startsWith("/login")) {
+                        String body = new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8);
+                        UsuarioDAO usuario = new UsuarioDAO();
+                        if (usuario.comprobarUsuario(body)) {
+                            sendResponse(exchange, 200, "{\"recibido\":\"¡Bienvenido!\"}");
+                        } else {
+                            sendResponse(exchange, 401, "{\"recibido\":\"Usuario o contraseña incorrecta\"}");
+                        }
+                    } else {
+                        sendResponse(exchange, 404, "Endpoint POST no válido");
+                    }
+                } else {
+                    sendResponse(exchange, 405, "Método no permitido");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                sendResponse(exchange, 500, "Error en Controller");
+            }
+
+            // Respuesta por defecto para GET
+            byte[] responseBytes = json.getBytes(StandardCharsets.UTF_8);
+            exchange.sendResponseHeaders(200, responseBytes.length);
+            OutputStream os = exchange.getResponseBody();
+            os.write(responseBytes);
+            os.close();
         }
 
         /**
-         * Envía una respuesta HTTP en formato JSON.
-         *
-         * @param exchange Objeto de intercambio.
-         * @param status Código HTTP.
-         * @param body Contenido de la respuesta.
-         * @throws IOException Si hay error al escribir.
+         * Método auxiliar para enviar respuestas HTTP.
          */
         private void sendResponse(HttpExchange exchange, int status, String body) throws IOException {
             exchange.getResponseHeaders().add("Content-Type", "application/json");
@@ -96,15 +139,19 @@ public class Main {
         private ProductoService service = new ProductoService();
         private Gson gson = new Gson();
 
-        /**
-         * Responde con la lista de productos en formato JSON.
-         *
-         * @param exchange Intercambio HTTP.
-         * @throws IOException Si hay error de red.
-         */
         @Override
         public void handle(HttpExchange exchange) throws IOException {
-            // Lógica de respuesta de catálogo
+            exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
+            if ("GET".equals(exchange.getRequestMethod())) {
+                List<Producto> productos = service.obtenerCatalogo();
+                String json = gson.toJson(productos);
+                exchange.getResponseHeaders().set("Content-Type", "application/json; charset=UTF-8");
+                byte[] responseBytes = json.getBytes(StandardCharsets.UTF_8);
+                exchange.sendResponseHeaders(200, responseBytes.length);
+                OutputStream os = exchange.getResponseBody();
+                os.write(responseBytes);
+                os.close();
+            }
         }
     }
 
@@ -114,15 +161,31 @@ public class Main {
     static class PedidoHandler implements HttpHandler {
         private PedidoController pedidoController = new PedidoController();
 
-        /**
-         * Recibe un JSON de pedido y lo procesa mediante el controlador.
-         *
-         * @param exchange Intercambio HTTP.
-         * @throws IOException Si hay error al leer o escribir.
-         */
         @Override
         public void handle(HttpExchange exchange) throws IOException {
-            // Lógica de recepción de pedidos
+            exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
+            exchange.getResponseHeaders().set("Access-Control-Allow-Methods", "POST, OPTIONS");
+            exchange.getResponseHeaders().set("Access-Control-Allow-Headers", "Content-Type");
+
+            if ("OPTIONS".equals(exchange.getRequestMethod())) {
+                exchange.sendResponseHeaders(204, -1);
+                return;
+            }
+
+            if ("POST".equals(exchange.getRequestMethod())) {
+                InputStream is = exchange.getRequestBody();
+                String jsonBody = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+                String jsonResponse = pedidoController.guardarPedido(jsonBody);
+                exchange.getResponseHeaders().set("Content-Type", "application/json; charset=UTF-8");
+                byte[] responseBytes = jsonResponse.getBytes(StandardCharsets.UTF_8);
+                int statusCode = jsonResponse.contains("\"error\"") ? 400 : 200;
+                exchange.sendResponseHeaders(statusCode, responseBytes.length);
+                OutputStream os = exchange.getResponseBody();
+                os.write(responseBytes);
+                os.close();
+            } else {
+                exchange.sendResponseHeaders(405, -1);
+            }
         }
     }
 }
