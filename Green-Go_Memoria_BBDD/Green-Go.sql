@@ -64,7 +64,7 @@ CREATE TABLE Usuarios (
     id_usuarios SERIAL PRIMARY KEY,
     usuario VARCHAR(50) NOT NULL,
     correo VARCHAR(50) NOT NULL,
-    contrasena TEXT NOT NULL,
+    contrasena TEXT NOT NULL
 );
 
 CREATE TABLE Configuracion_global (
@@ -223,9 +223,3 @@ VALUES
 -- =====================================================
 -- CONSULTA PRINCIPAL (productos con categorías, impuestos y alérgenos)
 -- =====================================================
-
-SELECT * FROM usuarios
-
-SELECT * FROM detalles_pedido
-
-SELECT * FROM alergen
