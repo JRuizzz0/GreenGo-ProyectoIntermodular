@@ -219,7 +219,3 @@ VALUES
 ((SELECT id_alergeno FROM Alergenos WHERE nombre_alergeno = 'Sulfitos'), 
  (SELECT id_producto FROM Producto WHERE nombre = 'Vino Tinto Bio (Copa)'), 
  'Sulfitos naturales de la fermentación.');
-
--- =====================================================
--- CONSULTA PRINCIPAL (productos con categorías, impuestos y alérgenos)
--- =====================================================
