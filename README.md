@@ -25,8 +25,12 @@ Tras tenerlo instalado, debemo seguir los siguientes pasos:
 
 -Una vez hecho esto, se nos abrirá una página al lado donde tendremos que insertar todos los Scripts del documento de base de datos 
 <img width="518" height="420" alt="image" src="https://github.com/user-attachments/assets/908e976f-26a6-49f4-bfd1-4e46fc9b0506" />
--Copiamos todas las lineas de Scripts y de Inserts (descargar el .docx dentro de la carpeta **Green-Go_Memoria_BBDD**)
-<img width="377" height="307" alt="image" src="https://github.com/user-attachments/assets/508bfe31-9eba-400f-acbc-2bcc839033dc" />
+-Descargamos el **archivo .sql** dentro de la carpeta **Green-Go_Memoria_BBDD**
+<img width="1546" height="366" alt="image" src="https://github.com/user-attachments/assets/c8c4c5e0-71d4-4963-bbe7-b43e8f18b3e2" />
+-Una vez descargado, pulsamos en el botón de archivo de pgAdmin4 para copiar los **INSERTS** y los **SCRIPTS**
+<img width="1523" height="179" alt="image" src="https://github.com/user-attachments/assets/a02c0189-c01e-4cae-9798-ccb211ae684c" />
+
+
 
 
 -Una vez esté todo copiado, pulsamos la tecla F5 para ejecutarlo. Una vez ejecutado, nos debe saltar un mensaje abajo a la derecha 
