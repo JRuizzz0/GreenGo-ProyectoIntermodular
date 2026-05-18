@@ -24,13 +24,13 @@ public class UsuarioDAO {
      */
     public List<Usuario> listarUsuarios() {
         List<Usuario> usuarios = new ArrayList<>();
-        String sql = "SELECT id, usuario, correo, contrasena FROM usuarios ";
+        String sql = "SELECT id_usuarios, usuario, correo, contrasena FROM usuarios ";
 
         try (Connection conn = DatabaseConfig.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                System.out.println(rs.getInt("id") + " - " + rs.getString("usuario"));
+                System.out.println(rs.getInt("id_usuarios") + " - " + rs.getString("usuario"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -137,7 +137,7 @@ public class UsuarioDAO {
      */
     public boolean findByEmail(String EmailBuscado) {
         boolean found = true;
-        String sql = "SELECT id, usuario FROM usuarios WHERE correo = ?";
+        String sql = "SELECT id_usuarios, usuario FROM usuarios WHERE correo = ?";
 
         try (Connection conn = DatabaseConfig.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
