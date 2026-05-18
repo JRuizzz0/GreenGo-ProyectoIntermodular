@@ -60,12 +60,7 @@ Para ejecutarla:
 <img width="953" height="348" alt="image" src="https://github.com/user-attachments/assets/e3b2dbe5-2b5a-4197-a765-e713c4690777" />
 
 
--Dentro del Git bash, copiamos el siguiente código:
-
-	git switch develop
-
-
--Una vez estemos en la **rama develop**, abrimos la carpeta de **src** (dentro del repositorio) <img width="615" height="343" alt="image" src="https://github.com/user-attachments/assets/d7c49e13-4cd1-4b4b-8e15-1ded63911bf8" />
+-Abrimos la carpeta de **src** (dentro del repositorio) <img width="615" height="343" alt="image" src="https://github.com/user-attachments/assets/d7c49e13-4cd1-4b4b-8e15-1ded63911bf8" />
 
 
 -Abrimos la carpeta **"config"** y entramos en la clase **"DatabaseConfig"**. Dentro de esta clase, debemos de cambiar el **USERNAME** y **PASSWORD** a nuestras credenciales de pgAdmin 4 <img width="1353" height="473" alt="image" src="https://github.com/user-attachments/assets/346dfcfb-cb4e-4f14-8cce-646766edffaa" />
@@ -100,15 +95,7 @@ Para ejecutarlo:
 -Clonamos el repositorio de **github**. Para ello, pulsamos Ctrl+Shift+P o F1 y escribimos git Clone <img width="587" height="431" alt="image" src="https://github.com/user-attachments/assets/de520364-1e38-4159-a0ee-2b7a120c68c8" /> --> -Pegamos la URL <img width="593" height="74" alt="image" src="https://github.com/user-attachments/assets/e754d200-d758-4e7c-8073-a2747ab405d4" /> --> -Se nos va a abrir una ventana con nuestras carpetas. Pulsamos en la carpeta que nos hemos creado y ya tendríamos el repositorio en nuestro ordenador
 
 
--En el menú de arriba pulsamos en **Terminal** y le damos a **New Terminal** para crear una nueva terminal <img width="634" height="434" alt="image" src="https://github.com/user-attachments/assets/fe6beee0-0f5e-44bf-87c8-673b6371fc31" />
-
-
--Una vez que tengamos la nueva terminal, copiamos el siguiente código:
-
-	git switch develop
-
-
--Al estar ya en la rama develop, abrimos la carpeta **"LOGIN"**, y dentro de ella, abrimos la clase **"login.html** <img width="162" height="344" alt="image" src="https://github.com/user-attachments/assets/05441c8d-2ba9-486d-9d05-459e1713854e" />
+-Abrimos la carpeta **"LOGIN"**, y dentro de ella, abrimos la clase **"login.html** <img width="162" height="344" alt="image" src="https://github.com/user-attachments/assets/05441c8d-2ba9-486d-9d05-459e1713854e" />
 
 
 -Una vez estemos en la clase login.html, pulsamos en el botón **Go Live** y se nos abrirá la página web <img width="1690" height="993" alt="image" src="https://github.com/user-attachments/assets/1ab211bd-b9e0-47e4-b3a1-b63df4ed1a9a" />
